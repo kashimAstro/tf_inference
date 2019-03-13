@@ -43,15 +43,8 @@ int main(int argc, const char * argv[]) {
              rectangle(image, rect, Scalar(0,0,255));
          }
       }
-/*       for(unsigned int i = 0; i < dati.size(); i++) {
-	  string msg = dati[i].label+" "+to_string(dati[i].prob)+"%";
-          rectangle(image, Rect(dati[i].rect.x, dati[i].rect.y-10, dati[i].rect.width, 10), Scalar(0,0,0), FILLED);
-	  putText(image, msg.c_str(), Point(dati[i].rect.x, dati[i].rect.y-5), FONT_HERSHEY_DUPLEX, 0.25, Scalar(255,255,255));
-          rectangle(image, dati[i].rect, Scalar(0,0,255));
-       }*/
-
-       imshow("output", image);
-       waitKey(0);
+      imshow("output", image);
+      waitKey(0);
     }
     return EXIT_SUCCESS;
 }

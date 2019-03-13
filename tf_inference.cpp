@@ -51,57 +51,12 @@ Tensor tf_inference::mat_to_tensor(Mat &pix) {
 }
 
 vector< Tensor > tf_inference::inference() {
-   //vector< dati_inference > dati;
-   /*if(pix.empty())
-      return dati;
-
-   int input_height = pix.size().height;
-   int input_width  = pix.size().width;
-
-   tensorflow::Tensor img_tf_with_shared_data(tensorflow::DT_UINT8, {1, input_height, input_width, pix.channels()});
-   uint8_t *pdata = img_tf_with_shared_data.flat<uint8_t>().data();
-   Mat data_img(input_height, input_width, CV_8UC3, pdata);
-   pix.convertTo(data_img, CV_8UC3);*/
-
    vector<Tensor> outputs;
-   /*Status run_status = _tf_session->Run({{"image_tensor:0", img_tf_with_shared_data}}, 
-				        {"detection_boxes:0", 
-                                         "detection_scores:0", 
-                                         "detection_classes:0", 
-					 "num_detections:0"}, {}, &outputs);*/
-
    Status run_status = _tf_session->Run(_inputs, _outputs, {}, &outputs);
    if(!run_status.ok()) {
       cerr << "session->run= " << run_status << endl;
       return outputs;
       }
-
-/* tensorflow::TTypes<float>::Flat scores = outputs[1].flat<float>();
-   tensorflow::TTypes<float>::Flat classes = outputs[2].flat<float>();
-   tensorflow::TTypes<float>::Flat num_detections = outputs[3].flat<float>();
-   auto boxes = outputs[0].flat_outer_dims<float,3>();
-   
-   int detections_count = (int)(num_detections(0));
-   for(int i = 0; i < detections_count; i++) {
-      if(scores(i) > threshold) {
-         float box_class = classes(i);
-         
-         int x1 = float(input_width)  * boxes(0,i,1);
-         int y1 = float(input_height) * boxes(0,i,0);
-         int x2 = float(input_width)  * boxes(0,i,3);
-         int y2 = float(input_height) * boxes(0,i,2);
-
-	 Point tl = Point((int)x1, (int)y1);
-         Point br = Point((int)x2, (int)y2);
-
-         dati_inference dnet;
-         dnet.id    = box_class; 
-         dnet.label = _tf_label_map[box_class];
-         dnet.prob  = (scores(i)  * 100);
-         dnet.rect  = Rect(tl,br);
-         dati.push_back(dnet);
-         }
-      }*/
    return outputs;
    }
 
