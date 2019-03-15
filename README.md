@@ -11,3 +11,6 @@ inference tensorflow object-detection semantic segmentation(mask-rcnn):<br>
 
 inference tensorflow lite classify:<br>
 <img src="other/lite_output.png"/>
+
+sample tensorflow events tensorboard (histogram):<br>
+<img src="other/tensorboard.png"/>
